@@ -1,0 +1,20 @@
+{
+  "base-debian": {
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
+    "features": {
+      "pixi": {}
+    }
+  },
+  "base-ubuntu": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "pixi": {}
+    }
+  },
+  "slim-debian": {
+    "image": "debian:bookworm-slim",
+    "features": {
+      "pixi": {}
+    }
+  }
+}

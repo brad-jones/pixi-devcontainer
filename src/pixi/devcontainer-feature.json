@@ -1,0 +1,38 @@
+{
+  "id": "pixi",
+  "version": "0.0.1",
+  "name": "Pixi Package Manager",
+  "description": "Perhaps the last devcontainer feature you will ever need?",
+  "documentationURL": "https://github.com/brad-jones/devcontainer-features/blob/master/src/pixi",
+  "options": {
+    "version": {
+      "type": "string",
+      "description": "The version of pixi to install",
+      "default": "latest"
+    }
+  },
+  "onCreateCommand": "/usr/local/share/pixi-onCreateCommand.sh",
+  "updateContentCommand": "/usr/local/share/pixi-updateContentCommand.sh",
+  "mounts": [
+    {
+      "source": "devcontainer-pixi-${localWorkspaceFolderBasename}",
+      "target": "${containerWorkspaceFolder}/.pixi",
+      "type": "volume"
+    },
+    {
+      "source": "devcontainer-pixi-rattler-cache",
+      "target": "/pixi-cache/rattler",
+      "type": "volume"
+    }
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "tamasfe.even-better-toml"
+      ]
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ]
+}

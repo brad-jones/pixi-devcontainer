@@ -1,0 +1,25 @@
+{
+  "editor.defaultFormatter": "dprint.dprint",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "*/devcontainer.json"
+      ],
+      "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json"
+    },
+    {
+      "fileMatch": [
+        "*/devcontainer-feature.json"
+      ],
+      "url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+    },
+    {
+      "fileMatch": [
+        "*/devcontainer-template.json"
+      ],
+      "url": "https://raw.githubusercontent.com/devcontainers/spec/4e19083adfb49abe297b4d254cb69e41ab56878b/schemas/devContainerTemplate.schema.json"
+    }
+  ]
+}
