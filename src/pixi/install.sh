@@ -27,8 +27,11 @@ if [ -n "$USER" ] && [ "$USER" != "root" ]; then
   fi
 fi
 
+echo "export PATH=\"\$HOME/.pixi/bin:\$PATH\"" >> "$HOME/.bashrc"
 echo "export PATH=\"$PWD/.pixi/env/bin:\$PATH\"" >> "$HOME/.bashrc"
+echo "export PATH=\"\$HOME/.pixi/bin:\$PATH\"" >> "$HOME/.zshrc"
 echo "export PATH=\"$PWD/.pixi/env/bin:\$PATH\"" >> "$HOME/.zshrc"
+echo "export PATH=\"\$HOME/.pixi/bin:\$PATH\"" >> "$HOME/.profile"
 echo "export PATH=\"$PWD/.pixi/env/bin:\$PATH\"" >> "$HOME/.profile"
 EOF
 
