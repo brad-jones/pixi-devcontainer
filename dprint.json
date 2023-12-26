@@ -15,7 +15,7 @@
   "exec": {
     "commands": [
       {
-        "command": "shfmt",
+        "command": "./.pixi/env/bin/shfmt",
         "exts": [
           "sh"
         ]
