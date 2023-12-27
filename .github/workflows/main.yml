@@ -3,6 +3,9 @@ on:
     branches:
       - master
 
+permissions:
+  packages: write
+
 jobs:
   main:
     runs-on: ubuntu-latest
