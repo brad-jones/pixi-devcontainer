@@ -2,7 +2,9 @@
   "image": "mcr.microsoft.com/devcontainers/base:debian",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "./features/pixi": {}
+    "./features/pixi": {
+      "addPathToShellRcFiles": false
+    }
   },
   "initializeCommand": "cp -R ./src/. ./.devcontainer/features",
   "onCreateCommand": "sudo chown ${USER} ./node_modules",
@@ -11,7 +13,7 @@
     "source=devcontainer-node_modules-${localWorkspaceFolderBasename},target=${containerWorkspaceFolder}/node_modules,type=volume"
   ],
   "remoteEnv": {
-    "PATH": "${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
+    "PATH": "${containerWorkspaceFolder}/.pixi/env/bin:${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
   },
   "customizations": {
     "vscode": {

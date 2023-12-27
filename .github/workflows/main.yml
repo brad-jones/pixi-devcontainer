@@ -4,25 +4,37 @@ on:
       - master
 
 jobs:
-  test:
+  main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
 
-      - uses: prefix-dev/setup-pixi@v0.4.1
+      - name: Setup Pixi Package Manager
+        uses: prefix-dev/setup-pixi@v0.4.1
         with:
           locked: true
           cache: true
 
-      - id: npm-cache-dir
+      - name: Get path to npm cache dir
+        id: npm-cache-dir
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
 
-      - uses: actions/cache@v3
+      - name: Cache node modules
+        uses: actions/cache@v3
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: pixi run npm-install
-      - run: pixi run test
+      - name: Install node modules
+        run: pixi run npm-install
+
+      - name: Test Features
+        run: pixi run test
+
+      - name: Publish Features
+        run: pixi run publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

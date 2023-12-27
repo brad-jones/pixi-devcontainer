@@ -1,14 +1,19 @@
 {
   "id": "pixi",
-  "version": "0.0.1",
-  "name": "Pixi Package Manager",
-  "description": "Perhaps the last devcontainer feature you will ever need?",
+  "version": "0.0.0",
+  "name": "Pixi Package Manager (installed via Github Releases)",
+  "description": "Pixi is a package management tool for developers. It allows the developer to install libraries and applications in a reproducible way. Use pixi cross-platform, on Windows, Mac and Linux.",
   "documentationURL": "https://github.com/brad-jones/devcontainer-features/blob/master/src/pixi",
   "options": {
     "version": {
-      "type": "string",
       "description": "The version of pixi to install",
+      "type": "string",
       "default": "latest"
+    },
+    "addPathToShellRcFiles": {
+      "description": "Inject pixi PATHs into any shell rc files.",
+      "type": "boolean",
+      "default": true
     }
   },
   "onCreateCommand": "/usr/local/share/pixi-onCreateCommand.sh",
