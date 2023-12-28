@@ -30,7 +30,7 @@ pre_package_bump_hooks = [
 post_bump_hooks = [
   "devcontainer features publish -n brad-jones/devcontainer-features ./src",
   "git push",
-  "git push origin {{version}}",
+  "git push origin v{{version}}",
 ]
 
 # Create a CHANGELOG that includes helpful links to github diffs / commits / PRs, etc.
