@@ -14,6 +14,12 @@ from_latest_tag = true
 # We don't need a root level CHANGELOG or tag for this monorepo
 generate_mono_repository_global_tag = false
 
+# Make sure our git identity is configured
+pre_bump_hooks = [
+  "git config --global user.email github-actions[bot]@users.noreply.github.com",
+  "git config --global user.name github-actions[bot]",
+]
+
 # These actions run inside the feature src directory
 pre_package_bump_hooks = [
   "rjp devcontainer-feature.json version {{version}} --limit 1",
