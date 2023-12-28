@@ -2,6 +2,12 @@
   "editor.defaultFormatter": "dprint.dprint",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "evenBetterToml.schema.associations": {
+    // Because there is no schema for cog yet but there is another schema for
+    // another unrelated tool called cog that evenBetterToml discovers which
+    // causes all sorts of havoc.
+    "cog.toml": "https://json.schemastore.org/base.json",
+  },
   "json.schemas": [
     {
       "fileMatch": [

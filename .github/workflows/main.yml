@@ -1,4 +1,6 @@
 on:
+  workflow_dispatch:
+  pull_request:
   push:
     branches:
       - master
@@ -12,12 +14,17 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Pixi Package Manager
         uses: prefix-dev/setup-pixi@v0.4.1
         with:
           locked: true
           cache: true
+
+      - name: Validate Conventional Commits
+        run: pixi run validate-commits
 
       - name: Get path to npm cache dir
         id: npm-cache-dir
@@ -38,6 +45,7 @@ jobs:
         run: pixi run test
 
       - name: Publish Features
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: pixi run publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

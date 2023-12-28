@@ -5,7 +5,9 @@
   "useTabs": false,
   "json": {},
   "toml": {},
-  "markdown": {},
+  "markdown": {
+    "textWrap": "always"
+  },
   "dockerfile": {},
   "prettier": {
     "associations": [

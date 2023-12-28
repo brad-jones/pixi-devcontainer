@@ -1,0 +1,36 @@
+# The Conventional Commits toolbox
+# see: https://github.com/cocogitto/cocogitto
+
+# All version numbers should be prefixed with v to denote
+# a version number over anything other type of tag
+tag_prefix = "v"
+
+# Only releases from master are allowed
+branch_whitelist = ["master"]
+
+# Check commit history, starting from the latest tag to HEAD
+from_latest_tag = true
+
+# We don't need a root level CHANGELOG or tag for this monorepo
+generate_mono_repository_global_tag = false
+
+# These actions run inside the feature src directory
+pre_package_bump_hooks = [
+  "rjp devcontainer-feature.json version {{version}} --limit 1",
+  "dprint fmt CHANGELOG.md devcontainer-feature.json",
+]
+
+# Create a CHANGELOG that includes helpful links to github diffs / commits / PRs, etc.
+[changelog]
+path = "CHANGELOG.md"
+template = "remote"
+remote = "github.com"
+owner = "brad-jones"
+repository = "devcontainer-features"
+authors = [
+  { signature = "Brad Jones", username = "brad-jones" },
+]
+
+# There should be one entry per feature
+[packages]
+pixi = { path = "src/pixi" }
