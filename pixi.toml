@@ -13,7 +13,11 @@ release = 'PATH="$PWD/node_modules/.bin:$PATH" ./bin/cog bump --auto'
 
 [tasks.shell]
 depends_on = ["npm-install"]
-cmd = 'PATH="$PWD/bin:$PWD/node_modules/.bin:$PATH" /usr/bin/env bash'
+cmd = 'PATH="$PWD/bin:$PWD/node_modules/.bin:$PATH" pixi shell'
+
+[tasks.code]
+depends_on = ["npm-install"]
+cmd = 'PATH="$PWD/bin:$PWD/node_modules/.bin:$PATH" code .'
 
 [dependencies]
 shellcheck = ">=0.9.0,<0.10"
