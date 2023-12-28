@@ -9,11 +9,7 @@ platforms = ["linux-64"]
 npm-install = "npm install -g npm && npm install"
 test = "./node_modules/.bin/devcontainer features test"
 validate-commits = "./bin/cog check"
-bump-version = 'PATH="$PWD/node_modules/.bin:$PATH" ./bin/cog bump --auto'
-
-[tasks.publish]
-depends_on = ["bump-version"]
-cmd = "./node_modules/.bin/devcontainer features publish -n brad-jones/devcontainer-features ./src"
+release = 'PATH="$PWD/node_modules/.bin:$PATH" ./bin/cog bump --auto'
 
 [tasks.shell]
 depends_on = ["npm-install"]

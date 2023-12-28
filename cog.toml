@@ -20,6 +20,13 @@ pre_package_bump_hooks = [
   "dprint fmt CHANGELOG.md devcontainer-feature.json",
 ]
 
+# Publish all features, push up the changelogs & tags
+post_bump_hooks = [
+  "devcontainer features publish -n brad-jones/devcontainer-features ./src",
+  "git push",
+  "git push origin {{version}}",
+]
+
 # Create a CHANGELOG that includes helpful links to github diffs / commits / PRs, etc.
 [changelog]
 path = "CHANGELOG.md"

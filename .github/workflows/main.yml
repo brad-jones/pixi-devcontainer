@@ -44,8 +44,8 @@ jobs:
       - name: Test Features
         run: pixi run test
 
-      - name: Publish Features
+      - name: Release Features
         if: ${{ github.ref == 'refs/heads/master' }}
-        run: pixi run publish
+        run: pixi run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
