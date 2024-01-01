@@ -70,6 +70,25 @@ package:
   size: 154117
   timestamp: 1700280881924
 - platform: linux-64
+  name: deno
+  version: 1.39.1
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  url: https://conda.anaconda.org/conda-forge/linux-64/deno-1.39.1-h0c53eb9_1.conda
+  hash:
+    md5: 33f158456fdab0312a9b55e23d6367bd
+    sha256: 89e7561b42bdc8562431c42834811ade1edfcf0de7581cbe0a6cb1f215b8de3c
+  build: h0c53eb9_1
+  arch: x86_64
+  subdir: linux-64
+  build_number: 1
+  license: MIT
+  license_family: MIT
+  size: 35347737
+  timestamp: 1703263161710
+- platform: linux-64
   name: go-shfmt
   version: 3.7.0
   category: main

@@ -5,6 +5,11 @@
   "useTabs": false,
   "json": {},
   "toml": {},
+  "typescript": {
+    "deno": true,
+    "module.sortImportDeclarations": "caseInsensitive",
+    "module.sortExportDeclarations": "caseInsensitive"
+  },
   "markdown": {
     "textWrap": "always"
   },
@@ -25,7 +30,7 @@
     ]
   },
   "includes": [
-    "**/*.{json,md,dockerfile,yml,yaml,toml,sh}"
+    "**/*.{json,md,dockerfile,yml,yaml,toml,sh,ts}"
   ],
   "excludes": [
     "pixi.lock"
@@ -35,6 +40,7 @@
     "https://plugins.dprint.dev/json-0.19.1.wasm",
     "https://plugins.dprint.dev/markdown-0.16.3.wasm",
     "https://plugins.dprint.dev/dockerfile-0.3.0.wasm",
+    "https://plugins.dprint.dev/typescript-0.88.7.wasm",
     "https://plugins.dprint.dev/exec-0.4.4.json@c207bf9b9a4ee1f0ecb75c594f774924baf62e8e53a2ce9d873816a408cecbf7",
     "https://plugins.dprint.dev/prettier-0.30.0.json@17f1975e77b53f95c642a25588bf27b0d3f36ebb70cbe134875f6b3c75736eed"
   ]

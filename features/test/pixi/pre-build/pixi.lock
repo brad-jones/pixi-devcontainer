@@ -1,0 +1,33 @@
+version: 3
+metadata:
+  content_hash:
+    linux-64: e90c2ee71ad70fc0a1c8302029533a7d1498f2bffcd0eaa8d2934700e775dc1d
+  channels:
+  - url: https://conda.anaconda.org/conda-forge/
+    used_env_vars: []
+  platforms:
+  - linux-64
+  sources: []
+  time_metadata: null
+  git_metadata: null
+  inputs_metadata: null
+  custom_metadata: null
+package:
+- platform: linux-64
+  name: go-task
+  version: 3.33.1
+  category: main
+  manager: conda
+  dependencies: []
+  url: https://conda.anaconda.org/conda-forge/linux-64/go-task-3.33.1-ha8f183a_0.conda
+  hash:
+    md5: 185bbd8663cd4fe7237f3d19bbf5df45
+    sha256: e2240c122c949b0b12c52295a986c298cfe77ee6e8b9a8854967741943aadacf
+  build: ha8f183a_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 2999123
+  timestamp: 1703208431896

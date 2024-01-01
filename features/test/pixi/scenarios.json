@@ -16,5 +16,18 @@
     "features": {
       "pixi": {}
     }
+  },
+  "pre-build": {
+    "build": {
+      "dockerfile": "Dockerfile",
+      "args": {
+        "BASE_IMG": "debian:bookworm-slim"
+      }
+    },
+    "features": {
+      "pixi": {
+        "workSpaceDir": "${containerWorkspaceFolder}"
+      }
+    }
   }
 }

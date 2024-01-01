@@ -41,11 +41,10 @@ jobs:
       - name: Install node modules
         run: pixi run npm-install
 
-      - name: Test Features
+      - name: Run all Tests
         run: pixi run test
 
-      - name: Release Features
-        if: ${{ github.ref == 'refs/heads/master' }}
+      - name: Release
         run: pixi run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

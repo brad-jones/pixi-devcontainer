@@ -1,0 +1,26 @@
+{
+  "id": "pixi-pre-build",
+  "version": "0.0.0",
+  "name": "Pixi Package Manager Template",
+  "description": "A devcontainer template, with the pixi package manager, setup for pre building. As opposed to installing a pixi environment into a volume.",
+  "documentationURL": "https://github.com/brad-jones/pixi-devcontainer/blob/master/templates/src/pixi-pre-build",
+  "options": {
+    "baseImg": {
+      "description": "The base image to use, must be glibc based (& for now a debian derivative).",
+      "type": "string",
+      "default": "debian:bookworm-slim",
+      "proposals": [
+        "mcr.microsoft.com/devcontainers/base:debian",
+        "mcr.microsoft.com/devcontainers/base:ubuntu"
+      ]
+    },
+    "pixiVersion": {
+      "description": "The version of the pixi binary to install.",
+      "type": "string",
+      "default": "latest"
+    }
+  },
+  "platforms": [
+    "Any"
+  ]
+}

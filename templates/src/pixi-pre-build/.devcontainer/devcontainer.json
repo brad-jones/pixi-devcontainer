@@ -1,0 +1,15 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "BASE_IMG": "${templateOption:baseImg}"
+    }
+  },
+  "features": {
+    "ghcr.io/brad-jones/pixi-devcontainer/pixi:latest": {
+      "version": "${templateOption:pixiVersion}",
+      "workSpaceDir": "${containerWorkspaceFolder}"
+    }
+  }
+}

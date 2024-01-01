@@ -1,19 +1,27 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "BASE_IMG": "mcr.microsoft.com/devcontainers/base:debian"
+    }
+  },
+  //"image": "mcr.microsoft.com/devcontainers/base:debian",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "./features/pixi": {
-      "addPathToShellRcFiles": false
+      "workSpaceDir": "${containerWorkspaceFolder}"
     }
   },
-  "initializeCommand": "cp -R ./src/. ./.devcontainer/features",
-  "onCreateCommand": "sudo chown ${USER} ./node_modules",
-  "updateContentCommand": "pixi run npm-install",
+  // A bit of a hack to east our own dog food
+  "initializeCommand": "rm -rf ./.devcontainer/features && cp -R ./features/src/. ./.devcontainer/features",
+  // Hopefully we can create some conda packages for the things we are installing with npm & then we can ditch all this
+  "onCreateCommand": "sudo chown ${USER} ./node_modules && pixi run npm-install",
   "mounts": [
     "source=devcontainer-node_modules-${localWorkspaceFolderBasename},target=${containerWorkspaceFolder}/node_modules,type=volume"
   ],
   "remoteEnv": {
-    "PATH": "${containerWorkspaceFolder}/bin:${containerWorkspaceFolder}/.pixi/env/bin:${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
+    "PATH": "${containerWorkspaceFolder}/bin:${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
   },
   "customizations": {
     "vscode": {

@@ -1,0 +1,12 @@
+[project]
+name = "pixi-pre-build"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Brad Jones <brad@bjc.id.au>"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tasks]
+
+[dependencies]
+go-task = ">=3.33.1,<3.34"

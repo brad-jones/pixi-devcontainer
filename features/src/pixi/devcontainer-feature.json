@@ -1,32 +1,26 @@
 {
   "id": "pixi",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "name": "Pixi Package Manager (installed via Github Releases)",
   "description": "Pixi is a package management tool for developers. It allows the developer to install libraries and applications in a reproducible way. Use pixi cross-platform, on Windows, Mac and Linux.",
-  "documentationURL": "https://github.com/brad-jones/devcontainer-features/blob/master/src/pixi",
+  "documentationURL": "https://github.com/brad-jones/pixi-devcontainer/blob/master/features/src/pixi",
   "options": {
     "version": {
       "description": "The version of pixi to install",
       "type": "string",
       "default": "latest"
     },
-    "addPathToShellRcFiles": {
-      "description": "Inject pixi PATHs into any shell rc files.",
-      "type": "boolean",
-      "default": true
+    "workSpaceDir": {
+      "description": "The directory of the workspace, pixi needs to know this ahead of time.",
+      "type": "string",
+      "default": "${containerWorkspaceFolder}"
     }
   },
   "onCreateCommand": "/usr/local/share/pixi-onCreateCommand.sh",
-  "updateContentCommand": "/usr/local/share/pixi-updateContentCommand.sh",
   "mounts": [
     {
       "source": "devcontainer-pixi-${localWorkspaceFolderBasename}",
       "target": "${containerWorkspaceFolder}/.pixi",
-      "type": "volume"
-    },
-    {
-      "source": "devcontainer-pixi-rattler-cache",
-      "target": "/pixi-cache/rattler",
       "type": "volume"
     }
   ],

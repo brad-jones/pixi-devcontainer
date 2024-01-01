@@ -20,15 +20,10 @@ pre_bump_hooks = [
   "git config --global user.name github-actions[bot]",
 ]
 
-# These actions run inside the feature src directory
-pre_package_bump_hooks = [
-  "rjp devcontainer-feature.json version {{version}} --limit 1",
-  "dprint fmt CHANGELOG.md devcontainer-feature.json",
-]
-
-# Publish all features, push up the changelogs & tags
+# Publish artifacts, push up the changelogs & tags
 post_bump_hooks = [
-  "devcontainer features publish -n brad-jones/devcontainer-features ./src",
+  "devcontainer features publish -n brad-jones/pixi-devcontainer ./features/src",
+  "devcontainer templates publish -n brad-jones/pixi-devcontainer ./templates/src",
   "git push",
   "git push --tags",
 ]
@@ -39,11 +34,22 @@ path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
 owner = "brad-jones"
-repository = "devcontainer-features"
+repository = "pixi-devcontainer"
 authors = [
   { signature = "Brad Jones", username = "brad-jones" },
 ]
 
-# There should be one entry per feature
-[packages]
-pixi = { path = "src/pixi" }
+# There should be one entry per publishable and/or deployable artifact in this monorepo
+[packages.pixi]
+path = "features/src/pixi"
+pre_bump_hooks = [
+  "rjp devcontainer-feature.json version {{version}} --limit 1",
+  "dprint fmt CHANGELOG.md devcontainer-feature.json",
+]
+
+[packages.pixi-pre-build]
+path = "templates/src/pixi-pre-build"
+pre_bump_hooks = [
+  "rjp devcontainer-template.json version {{version}} --limit 1",
+  "dprint fmt CHANGELOG.md devcontainer-template.json",
+]
