@@ -11,18 +11,21 @@ go-shfmt = ">=3.7.0,<3.8"
 nodejs = ">=20.9.0,<20.10"
 deno = ">=1.39.1,<1.40"
 
+[activation]
+scripts = ["activation.sh"]
+
 [tasks]
 npm-install = "npm install -g npm && npm install"
 test = { depends_on = ["test-features", "test-templates"] }
-test-features = "./node_modules/.bin/devcontainer features test ./features"
-test-templates = "deno test -A ./templates/test/*.ts"
-validate-commits = "./bin/cog check"
-release = 'PATH="$PWD/node_modules/.bin:$PATH" ./bin/cog bump --auto'
+test-features = "devcontainer features test ./features"
+test-templates = 'deno test -A ./templates/test/*.ts'
+validate-commits = "cog check"
+release = 'cog bump --auto'
 
 [tasks.shell]
 depends_on = ["npm-install"]
-cmd = 'PATH="$PWD/bin:$PWD/node_modules/.bin:$PATH" pixi shell'
+cmd = 'pixi shell'
 
 [tasks.code]
 depends_on = ["npm-install"]
-cmd = 'PATH="$PWD/bin:$PWD/node_modules/.bin:$PATH" code .'
+cmd = 'code .'

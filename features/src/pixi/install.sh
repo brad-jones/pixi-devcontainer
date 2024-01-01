@@ -42,33 +42,55 @@ preinstall_pixi_env() {
 
   echo "pre installing pixi environment into /pixi"
   mkdir -p "${PIXI_WORKSPACE_DIR}"
-  cp /pixi/pixi.* "${PIXI_WORKSPACE_DIR}/"
+  cp /pixi/* "${PIXI_WORKSPACE_DIR}/"
   chown -R "${_REMOTE_USER}" "${PIXI_WORKSPACE_DIR}"
   prevDir="$PWD"
   cd "${PIXI_WORKSPACE_DIR}"
   su "${_REMOTE_USER}" -c "pixi install"
 
   # Would be amazing not to have to resort to using tmux here
+  # We need a sourceable output from pixi, eg: '. $(pixi shell --init)'
   ensure_tmux
   rm -rf /tmp/pixi_env*.sh
   su "${_REMOTE_USER}" -c 'tmux new -d "pixi shell"'
   sleep 1
   PIXI_INIT="$(cat /tmp/pixi_env*.sh)"
-  PIXI_INIT="$(echo "${PIXI_INIT}" | sed '/export PATH=.*/d')"
+
+  # Modify the PATH slightly so that we can still incorprate PATHs from other
+  # sources like devcontainer.json remoteEnv or containerEnv.
+  PIXI_INIT="$(echo "${PIXI_INIT}" | sed "s,${PATH},\${PATH},")"
+
+  # De-dupe paths
+  # see: https://superuser.com/a/1771082
+  PIXI_INIT="${PIXI_INIT}\nif [[ -x /usr/bin/awk ]]; then export PATH=\"\$(echo \"\$PATH\" | /usr/bin/awk 'BEGIN { RS=\":\"; } { sub(sprintf(\"%c$\", 10), \"\"); if (A[\$0]) {} else { A[\$0]=1; printf(((NR==1) ?\"\" : \":\") \$0) }}')\"; fi"
+
+  # Modify the prompt too. IMO we just want to highlight that we are in a pixi
+  # environment we don't need to tell them the folder basename again.
+  #
+  # UPDATE: Ah it's the project name from pixi.toml that is shown here & in my
+  # case it just so happens to be the same as the basename & so for me it just
+  # looked like duplicated info in my shell.
+  #
+  # Still wouldn't this be the case most of the time? Who would have a dirctory
+  # name different to the project name? Anyway I'm going to leave this little
+  # modification in place for now.
   PIXI_INIT="$(echo "${PIXI_INIT}" | sed '/export PIXI_PROMPT=.*/d')"
   PIXI_INIT="$(echo "${PIXI_INIT}" | sed '/export PS1=.*/d')"
   PIXI_INIT="${PIXI_INIT}\nexport PIXI_PROMPT=\"pixi\""
   PIXI_INIT="${PIXI_INIT}\nexport PS1=\"(\${PIXI_PROMPT}) \$PS1\""
-  PIXI_INIT="${PIXI_INIT}\nexport PATH=\"\${CONDA_PREFIX}/bin:\${PATH}\""
+
+  # Write the init script to all the various profiles
+  # I actually sort of thought that writting it only to .profile would work for all cases???
   echo "${PIXI_INIT}" >>"${_REMOTE_USER_HOME}/.profile"
   echo "${PIXI_INIT}" >>"${_REMOTE_USER_HOME}/.bashrc"
   echo "${PIXI_INIT}" >>"${_REMOTE_USER_HOME}/.zshrc"
-  clean_tmux
 
+  # Move the pixi workspace back to /pixi where we will symlink to it on container start
   cd "$prevDir"
   rm -rf /pixi
   mv "${PIXI_WORKSPACE_DIR}" /pixi
   chown "${_REMOTE_USER}" /pixi
+  clean_tmux
 }
 
 # The following installs & then uninstalls tmux if need be

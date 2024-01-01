@@ -20,9 +20,6 @@
   "mounts": [
     "source=devcontainer-node_modules-${localWorkspaceFolderBasename},target=${containerWorkspaceFolder}/node_modules,type=volume"
   ],
-  "remoteEnv": {
-    "PATH": "${containerWorkspaceFolder}/bin:${containerWorkspaceFolder}/node_modules/.bin:${containerEnv:PATH}"
-  },
   "customizations": {
     "vscode": {
       "extensions": [
