@@ -33,7 +33,8 @@
     "**/*.{json,md,dockerfile,yml,yaml,toml,sh,ts}"
   ],
   "excludes": [
-    "pixi.lock"
+    "pixi.lock",
+    "CHANGELOG.md"
   ],
   "plugins": [
     "https://plugins.dprint.dev/toml-0.5.4.wasm",
