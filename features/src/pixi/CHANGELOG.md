@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file. See
 guidelines.
 
 - - -
+## pixi-v0.2.0 - 2024-01-24
+#### Bug Fixes
+- incorrect version interpolation #1 - (a497fc2) - brad-jones
+#### Build system
+- can not format changelog files with dprint - (7129f3b) - brad-jones
+#### Features
+- added the additionalInstallTask option - (3e9c12c) - brad-jones
+
+- - -
+
 
 ## pixi-v0.1.0 - 2024-01-01
 
