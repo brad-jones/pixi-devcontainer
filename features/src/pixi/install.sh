@@ -4,7 +4,11 @@ set -e
 # OPTIONS
 # ------------------------------------------------------------------------------
 PIXI_VERSION="${VERSION:-"latest"}"
-PIXI_DOWNLOAD_URL="https://github.com/prefix-dev/pixi/releases/${PIXI_VERSION}/download/pixi-x86_64-unknown-linux-musl.tar.gz"
+PIXI_DOWNLOAD_V="latest/download"
+if [ "${PIXI_VERSION}" != "latest" ]; then
+  PIXI_DOWNLOAD_V="download/${PIXI_VERSION}"
+fi
+PIXI_DOWNLOAD_URL="https://github.com/prefix-dev/pixi/releases/${PIXI_DOWNLOAD_V}/pixi-x86_64-unknown-linux-musl.tar.gz"
 PIXI_WORKSPACE_DIR="${WORKSPACEDIR:-"/containerWorkspaceFolder"}"
 
 # This actually does the installation of the pixi command it's self
