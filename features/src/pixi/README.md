@@ -54,7 +54,22 @@ COPY ./pixi.* /pixi/
 
 ## Options
 
-| Options Id   | Description                                                            | Type   | Default Value      |
-| ------------ | ---------------------------------------------------------------------- | ------ | ------------------ |
-| version      | The version of pixi to install.                                        | string | latest             |
-| workSpaceDir | The directory of the workspace, pixi needs to know this ahead of time. | string | n/a - **REQUIRED** |
+| Options Id            | Description                                                            | Type   | Default Value      |
+| --------------------- | ---------------------------------------------------------------------- | ------ | ------------------ |
+| version               | The version of pixi to install.                                        | string | latest             |
+| workSpaceDir          | The directory of the workspace, pixi needs to know this ahead of time. | string | n/a - **REQUIRED** |
+| additionalInstallTask | An additional pixi task to execute after 'pixi install'                | string | ""                 |
+
+### `additionalInstallTask`
+
+To clarify this is the name of a pixi task defined in your `pixi.toml` file.
+
+If this value is set the following will be in effect be executed.
+
+```
+pixi install && pixi run {{additionalInstallTask}}
+```
+
+This is especially advantageous for _"baking"_ additional tooling into your
+pre-built image. For example you may install secondary tools via `npm` or
+similar.

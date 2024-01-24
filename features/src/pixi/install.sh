@@ -10,6 +10,7 @@ if [ "${PIXI_VERSION}" != "latest" ]; then
 fi
 PIXI_DOWNLOAD_URL="https://github.com/prefix-dev/pixi/releases/${PIXI_DOWNLOAD_V}/pixi-x86_64-unknown-linux-musl.tar.gz"
 PIXI_WORKSPACE_DIR="${WORKSPACEDIR:-"/containerWorkspaceFolder"}"
+PIXI_ADDITIONAL_INSTALL_TASK="${ADDITIONALINSTALLTASK:-""}"
 
 # This actually does the installation of the pixi command it's self
 # ------------------------------------------------------------------------------
@@ -51,6 +52,11 @@ preinstall_pixi_env() {
   prevDir="$PWD"
   cd "${PIXI_WORKSPACE_DIR}"
   su "${_REMOTE_USER}" -c "pixi install"
+
+  if [ -n "${PIXI_ADDITIONAL_INSTALL_TASK}" ]; then
+    echo "running additional install task"
+    su "${_REMOTE_USER}" -c "pixi run ${PIXI_ADDITIONAL_INSTALL_TASK}"
+  fi
 
   # Would be amazing not to have to resort to using tmux here
   # We need a sourceable output from pixi, eg: '. $(pixi shell --init)'
